@@ -25,7 +25,7 @@
 + First Step Clone the repository
 
 ```
-git clone
+git clone https://github.com/userlg/Python-Cli-Mongo-CRUD
 ```
 
 + Inside the folder project install the requirements
