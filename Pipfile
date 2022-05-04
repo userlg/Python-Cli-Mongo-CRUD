@@ -8,6 +8,7 @@ colorama = "*"
 python-dotenv = "*"
 pymongo = "*"
 wheel = "*"
+tqdm = "*"
 
 [dev-packages]
 
