@@ -33,3 +33,9 @@ python app.python
 + Is important have mongodb installed and running, with the database Post created and the collection posts
 
 ---------
+
+# Configuration to ENV file
+
+### Create the .env file and guide yourself with env-example-file. This litle project takes the enviorments variables from the .env file
+
+## Created by Userlg

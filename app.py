@@ -9,6 +9,7 @@ from progress_bar import progress_bar as pb
 from os import environ
 import datetime
 import socket
+import time
 
 # <--------Colors---------->
 green = Fore.GREEN
@@ -18,6 +19,51 @@ yellow = Fore.YELLOW
 blue = Fore.BLUE
 cyan = Fore.CYAN
 MONGODB_HOST = socket.gethostbyname(socket.gethostname())
+
+
+
+def get_title() -> str:
+    title = input(green + '\n\tIntroduce title of the post \n\n\t' + white)
+    while(len(title) == 0):
+        title = input(green +'\n\tIntroduce title of the post \n\n\t' + white)
+    
+    return title
+
+
+
+#This function is for manage a simple menu in the terminal
+def menu(db) -> None:
+    list_values = ['1','2','3','4','5','6']
+    res = '10'
+    while(res != '6'):
+        while (res not in list_values):
+            time.sleep(1.2)
+    
+            print(yellow +'\n\t\t MAIN MENU \n\n' + white)
+            print(yellow +'\n\t1: Get all Post')
+            print(yellow +'\n\t2: Insert a Post')
+            print(yellow +'\n\t3: Edit one Post')
+            print(yellow +'\n\t4: Delete one Post')
+            print(yellow +'\n\t5: Find a Post')
+            print(yellow +'\n\t6: Exit \n\t\t')
+            res = input('\n\tPlease introduce your option \n\t-->')
+    
+        if res == '1':
+            get_all_post(db)
+        elif res == '2':
+            insert_post(db)
+        elif res == '3':
+            update_post(db,get_title())
+        elif res == '4':
+            delete_one_post(db,get_title())
+        elif res == '5':
+            find_post(db,get_title())
+        if res != '6':
+           res = '10'
+    
+    print(green + '\n\t\t--->Thanks for use this App, Bye')
+    
+
 
 
 def input_data(context: str) -> str:
@@ -86,7 +132,7 @@ def get_all_post(db) -> None:
          print('\n\n')
 
 # This method works to find an specific post by its title
-def find_post(title: str, db) -> None:
+def find_post(db, title: str) -> None:
     collection = db.posts
     result = collection.find_one({"title": title})
     if result:
@@ -94,6 +140,21 @@ def find_post(title: str, db) -> None:
         print('\n\n\n')
     else:
         print(red + '\n\t Post not found \n\n' + white)
+
+# This method allow update one post
+def update_post(db,title: str):
+    collection = db.posts
+
+
+    new_values = {
+
+        "$set": {
+            "title": input_data('title'),
+            "description": input_data('description')
+        }
+    }
+    result = collection.update_one({"title": title},new_values)
+    pp(result, width=50, indent=10)
 
 
 # This method allows find an post and deleted by de index key title
@@ -107,16 +168,18 @@ def delete_one_post(db,title: str) -> None:
         print(yellow + '\n\t\t' + e)
 
 def main() -> None:
-
-    mongo_conection = start_connection()
     pb()
+    mongo_conection = start_connection()
+    
     if mongo_conection:
         db = mongo_conection.Post
         #pp(mongo_conection.list_database_names(), indent=5, width=160)
         #insert_post(db)
         #get_all_post(db)
         # find_post('test',db)
-        delete_one_post(db,'test')
+        #delete_one_post(db,'test')
+        #update_post(db,'new')
+        menu(db)
     else:
         print(red + '\n\t\t  Database Conection Failed --> Mongo Message \n\n' + white)
 
