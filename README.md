@@ -4,6 +4,12 @@
 
 ------
 
+![Capture 1](assets/python.png)
+
+![Capture 2](assets/mongo.png)
+
+------
+
 # Requires
 
 + Python 3
@@ -28,13 +34,18 @@ pip install -r requirements.txt
 ```
 + Run the app
 ```
-python app.python
+python app.py
 ```
 + Is important have mongodb installed and running, with the database Post created and the collection posts
 
 ---------
+#  How it Works ??
 
-# Configuration to ENV file
+### This application contains a menu with several options to manage the diferent kinds of operations as insert a post, updade a post, find one post, delete a post. It use is very simple
+
+-------
+
+# Configuration to ENV File
 
 ### Create the .env file and guide yourself with env-example-file. This litle project takes the enviorments variables from the .env file
 
