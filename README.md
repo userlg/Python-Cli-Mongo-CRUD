@@ -41,6 +41,8 @@ python app.py
 ---------
 #  How it Works ??
 
+![Capture 3](assets/img1.png)
+
 ### This application contains a menu with several options to manage the diferent kinds of operations as insert a post, updade a post, find one post, delete a post. It use is very simple
 
 -------
